@@ -29,8 +29,8 @@ const HAND_CONNECTIONS = [
 ]
 
 export function useMediaPipe(
-  videoRef: React.RefObject<HTMLVideoElement>,
-  canvasRef: React.RefObject<HTMLCanvasElement>,
+  videoRef: React.RefObject<HTMLVideoElement | null>,
+  canvasRef: React.RefObject<HTMLCanvasElement | null>,
   activeSticker: string | null = null,
   isSnapEnabled: boolean = true,
   manualScale: number = 1,
