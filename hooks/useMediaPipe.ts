@@ -142,47 +142,7 @@ export function useMediaPipe(
             const width = canvas.width
             const height = canvas.height
 
-            // D. Draw HUD (White Lines / Red Dots)
-            ctx.save()
-            ctx.translate(width, 0)
-            ctx.scale(-1, 1) // Mirror HUD
-            
-            // Draw Green Hands
-            ctx.strokeStyle = 'white'
-            ctx.fillStyle = 'red'
-            ctx.lineWidth = 2
-            
-            const drawConnection = (landmarks: any[], pairs: number[][]) => {
-                if(!landmarks) return
-                for(const hand of landmarks) {
-                    for(const [start, end] of pairs) {
-                        const p1 = hand[start]; const p2 = hand[end]
-                        ctx.beginPath()
-                        ctx.moveTo(p1.x * width, p1.y * height)
-                        ctx.lineTo(p2.x * width, p2.y * height)
-                        ctx.stroke()
-                    }
-                    for(const p of hand) {
-                        ctx.beginPath(); ctx.arc(p.x * width, p.y * height, 2, 0, 2 * Math.PI); ctx.fill()
-                    }
-                }
-            }
-            drawConnection(results.leftHandLandmarks, HAND_CONNECTIONS)
-            drawConnection(results.rightHandLandmarks, HAND_CONNECTIONS)
-
-            // Draw Cyan Chest
-            if (results.poseLandmarks && results.poseLandmarks.length > 0) {
-                const pose = results.poseLandmarks[0]
-                ctx.strokeStyle = 'white'
-                ctx.lineWidth = 2
-                for (const [start, end] of UPPER_BODY_CONNECTIONS) {
-                    const p1 = pose[start]; const p2 = pose[end]
-                    ctx.beginPath(); ctx.moveTo(p1.x * width, p1.y * height); ctx.lineTo(p2.x * width, p2.y * height); ctx.stroke()
-                }
-            }
-            ctx.restore()
-
-            // E. Hand Gesture Logic (The Pinch)
+            // D. Hand Gesture Logic (The Pinch)
             let cursor = { x: 0, y: 0, active: false }
             
             // Check pinch (Left or Right hand)
@@ -305,7 +265,7 @@ export function useMediaPipe(
                 }
             }
 
-            // G. Draw Sticker
+            // G. Draw Sticker (BEFORE Wireframe)
             if (stickerImageRef.current) {
                 // If snap disabled and still manual, use center if no pos set?
                 // Already handled by init load
@@ -325,6 +285,46 @@ export function useMediaPipe(
                 ctx.drawImage(stickerImageRef.current, -finalW/2, -finalH/2, finalW, finalH)
                 ctx.restore()
             }
+
+            // H. Draw HUD Wireframe (ON TOP of Sticker)
+            ctx.save()
+            ctx.translate(width, 0)
+            ctx.scale(-1, 1) // Mirror HUD
+            
+            // Draw Hands (White Lines / Red Dots)
+            ctx.strokeStyle = 'white'
+            ctx.fillStyle = 'red'
+            ctx.lineWidth = 2
+            
+            const drawConnection = (landmarks: any[], pairs: number[][]) => {
+                if(!landmarks) return
+                for(const hand of landmarks) {
+                    for(const [start, end] of pairs) {
+                        const p1 = hand[start]; const p2 = hand[end]
+                        ctx.beginPath()
+                        ctx.moveTo(p1.x * width, p1.y * height)
+                        ctx.lineTo(p2.x * width, p2.y * height)
+                        ctx.stroke()
+                    }
+                    for(const p of hand) {
+                        ctx.beginPath(); ctx.arc(p.x * width, p.y * height, 2, 0, 2 * Math.PI); ctx.fill()
+                    }
+                }
+            }
+            drawConnection(results.leftHandLandmarks, HAND_CONNECTIONS)
+            drawConnection(results.rightHandLandmarks, HAND_CONNECTIONS)
+
+            // Draw Upper Body (White Lines / Red Dots)
+            if (results.poseLandmarks && results.poseLandmarks.length > 0) {
+                const pose = results.poseLandmarks[0]
+                ctx.strokeStyle = 'white'
+                ctx.lineWidth = 2
+                for (const [start, end] of UPPER_BODY_CONNECTIONS) {
+                    const p1 = pose[start]; const p2 = pose[end]
+                    ctx.beginPath(); ctx.moveTo(p1.x * width, p1.y * height); ctx.lineTo(p2.x * width, p2.y * height); ctx.stroke()
+                }
+            }
+            ctx.restore()
         } // End results check
       }
 
