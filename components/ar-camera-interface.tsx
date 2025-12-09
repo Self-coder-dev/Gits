@@ -401,8 +401,8 @@ export function ARCameraInterface() {
         </div>
       )}
 
-      {/* Premium Watermark - Safe Zone Positioning (TV Network Bug Style) */}
-      <div className="absolute bottom-[5%] right-[5%] text-white/90 font-bold text-xl drop-shadow-md text-right z-50 pointer-events-none font-['Avenir_Next']">
+      {/* Premium Watermark - Subtle Professional Hallmark */}
+      <div className="absolute bottom-6 right-6 text-[1.8vh] font-bold opacity-25 text-right z-50 pointer-events-none text-white">
         Made by Blue Ocean Tech
       </div>
 
