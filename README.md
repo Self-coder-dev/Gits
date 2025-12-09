@@ -1,5 +1,12 @@
 # ⭐️ **Stargaze AR (Iron Man Interface)**
 
+
+![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-0099CC?style=for-the-badge&logo=google&logoColor=white)
+
+
 A futuristic augmented-reality interface inspired by the Iron Man HUD — built with **Next.js**, **MediaPipe**, and gesture-driven controls.
 
 ---
