@@ -5,6 +5,7 @@ import Webcam from "react-webcam"
 import { TopHUD } from "./top-hud"
 import { BottomDock } from "./bottom-dock"
 import { TextInputOverlay } from "./text-input-overlay"
+import { PremiumModal } from "./premium-modal"
 import { User, X, Download, Trash2 } from "lucide-react"
 import { useMediaPipe } from "@/hooks/useMediaPipe"
 
@@ -24,6 +25,8 @@ export function ARCameraInterface() {
   const [isRecording, setIsRecording] = useState(false)
   const [recordingTime, setRecordingTime] = useState(0)
   const [recordedVideo, setRecordedVideo] = useState<string | null>(null)
+  // Premium modal state
+  const [isPremiumModalOpen, setIsPremiumModalOpen] = useState(false)
   const webcamRef = useRef<Webcam>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -114,7 +117,7 @@ export function ARCameraInterface() {
     }
   }
 
-  // Trigger file input when Add button is clicked
+  // Trigger file input when Add button is clicked (free for all users)
   const handleAddClick = () => {
     fileInputRef.current?.click()
   }
@@ -310,28 +313,36 @@ export function ARCameraInterface() {
         style={{ pointerEvents: "none" }}
       />
 
-      {/* Top Right Menu - User Profile */}
-      <div className="fixed top-4 right-4 z-30">
+      {/* Top Left Menu - User Profile */}
+      <div className="fixed top-6 left-6 z-30">
         <button
           onClick={() => setShowMenu(!showMenu)}
-          className="text-white hover:opacity-80 transition-opacity"
-          style={{ filter: 'drop-shadow(0 2px 2px rgba(0,0,0,0.8))' }}
+          className="w-10 h-10 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 flex items-center justify-center text-white hover:bg-black/60 transition-all"
+          style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }}
           aria-label="User menu"
         >
-          <User className="w-6 h-6" />
+          <User className="w-5 h-5" />
         </button>
 
         {/* Dropdown Menu */}
         {showMenu && (
-          <div className="absolute top-10 right-0 bg-black/90 backdrop-blur-xl border border-white/10 rounded-lg overflow-hidden min-w-[180px] shadow-2xl">
-            <div className="px-4 py-2 text-xs text-gray-400 border-b border-white/10">
-              Guest User
-            </div>
-            <div className="px-4 py-2 text-sm text-white border-b border-white/10">
-              Tier: Free
-            </div>
-            <button className="w-full px-4 py-3 text-sm text-white font-bold hover:bg-white/10 transition-all text-left">
-              Unlock Pro 💎
+          <div className="absolute top-12 left-0 bg-black/90 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden min-w-[180px] shadow-2xl">
+            <button 
+              className="w-full px-4 py-3 text-sm text-white/80 hover:bg-white/10 transition-all text-left"
+              onClick={() => setShowMenu(false)}
+            >
+              My Gallery
+            </button>
+            <div className="h-px bg-white/10" />
+            <button 
+              className="w-full px-4 py-3 text-sm font-bold text-yellow-400 hover:bg-yellow-400/10 transition-all text-left flex items-center gap-2"
+              onClick={() => {
+                setShowMenu(false)
+                setIsPremiumModalOpen(true)
+              }}
+            >
+              Unlock Pro
+              <span className="text-xs">✨</span>
             </button>
           </div>
         )}
@@ -401,10 +412,13 @@ export function ARCameraInterface() {
         </div>
       )}
 
-      {/* Premium Watermark - Subtle Professional Hallmark */}
-      <div className="absolute bottom-6 right-6 text-[1.8vh] font-bold opacity-25 text-right z-50 pointer-events-none text-white">
+      {/* Premium Watermark - Clickable to Open Premium Modal */}
+      <button 
+        onClick={() => setIsPremiumModalOpen(true)}
+        className="absolute bottom-6 right-6 text-[1.8vh] font-bold opacity-25 text-right z-50 text-white hover:opacity-40 transition-opacity cursor-pointer"
+      >
         Made by Blue Ocean Tech
-      </div>
+      </button>
 
       {/* Countdown Overlay */}
       {countdown !== null && countdown > 0 && (
@@ -522,6 +536,12 @@ export function ARCameraInterface() {
           </div>
         </div>
       )}
+
+      {/* Premium Upsell Modal */}
+      <PremiumModal 
+        isOpen={isPremiumModalOpen} 
+        onClose={() => setIsPremiumModalOpen(false)} 
+      />
     </div>
   )
 }

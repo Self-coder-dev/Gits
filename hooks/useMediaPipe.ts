@@ -196,6 +196,7 @@ export function useMediaPipe(
             ctx.save()
             ctx.translate(drawX, drawY)
             ctx.rotate(drawRotation)
+            ctx.scale(-1, 1) // Un-mirror sticker so text is readable
             
             const sWidth = stickerImageRef.current.width
             const sHeight = stickerImageRef.current.height
