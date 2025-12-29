@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⭐️ **Stargaze AR (Iron Man Interface)**
 
-## Getting Started
+1️⃣ Tech Stack Badges
 
-First, run the development server:
+
+![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-0099CC?style=for-the-badge&logo=google&logoColor=white)
+
+
+A futuristic augmented-reality interface inspired by the Iron Man HUD — built with **Next.js**, **MediaPipe**, and gesture-driven controls.
+
+---
+
+## 🚀 **Overview**
+
+**Stargaze AR** is an immersive web-based AR experience that combines **skeletal hand tracking**, **face anchoring**, and **gesture-controlled interactions**. Designed for browsers with real-time computer vision capabilities, the app enables users to manipulate 3D objects, attach dynamic facial overlays, and record AR-enhanced photos and videos — all within a sleek sci-fi interface.
+
+---
+
+## ✨ **Key Features**
+
+### 🖐️ **Skeletal Hand Tracking**
+
+* Powered by **MediaPipe Hands**
+* Detects **pinch gestures** to grab, move, and place virtual objects
+* Smooth, low-latency interaction for intuitive AR manipulation
+
+### 😎 **Face Anchoring**
+
+* Uses **MediaPipe Face Mesh**
+* Stickers and overlays snap to the **nose bridge**
+* Anchored elements rotate naturally with head movement
+
+### 🩻 **X-Ray Vision Mode (HUD Wireframe)**
+
+* Wireframe AR HUD renders on top of objects
+* Great for precision alignment and stylized UI visuals
+* Optional toggle for cinematic or diagnostic modes
+
+### 📸 **Photo & Video Studio**
+
+* Capture AR-enhanced **photos**
+* Record **10-second video clips** with full compositing
+* Ideal for demos, content creation, and social sharing
+
+### 📊 **Vercel Analytics**
+
+* Built-in visitor tracking
+* Zero-config analytics through Vercel’s platform
+
+---
+
+## 🧰 **Tech Stack**
+
+* **Next.js** – UI, routing, server functions
+* **TensorFlow / MediaPipe** – hand and face tracking
+* **React** – component-driven interaction layer
+* **Tailwind CSS** – styling and layout
+* **Vercel Analytics** – usage metrics and insights
+
+---
+
+## 🛠️ **Local Development**
+
+Follow these steps to run **Stargaze AR** locally:
+
+### **1. Clone the repository**
+
+```bash
+git clone https://github.com/your-username/stargaze-ar.git
+cd stargaze-ar
+```
+
+### **2. Install dependencies**
+
+```bash
+npm install
+```
+
+### **3. Start the development server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### **4. Open in your browser**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Visit:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+http://localhost:3000
+```
 
-## Learn More
+Your webcam/microphone must be enabled for AR tracking and recording.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 **License**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT — free to use, modify, and distribute.
